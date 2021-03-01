@@ -1,0 +1,180 @@
+<!-- include header -->
+<% include ../common/header %>
+<!-- / end include -->	
+
+<style>#example_filter{display: none !important;}</style>
+<style>#datatable_filter{display:none !important}</style>
+<script>$('.<%- tableTitle %>-li').addClass('active');</script>
+              
+<main class="app-content userListingContainer">
+    <div class="app-title">
+        <div>
+          <h1>Products</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+                <div class="search-bar-container">
+                    <div class="row"> 
+                      <div class="offset-md-6 col-md-12 form-inline text-right">
+                          <div class="form-group col-md-3">  
+                              <label style="display: block;text-align: left;">Search: </label>
+                              <input class="form-control form-control-sm" id="searchCustomInput" style="width: 100%;" placeholder="Search" />
+                          </div>
+                          <div class="form-group col-md-3">  
+                              <label style="display: block;visibility: hidden;">button</label>
+                              <a class="btn btn-primary btn-sm" href="<%- baseUrl %>admin/<%- tableTitle %>/add" style="width: 100%;text-transform: capitalize;">+ Category</a>
+                          </div>
+                        </div>		
+                    </div> 
+                    
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered table2excel" id="datatable">
+                  <thead>
+                    <tr>
+                      <th>CategoryId</th>
+                      <th>CategoryName</th>
+                      <th>CategoryType</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                      <% for(var i=0; i<result.length; i++) { %>
+                          <tr>
+                            <td class="datatable-text-wrap" style="text-transform:none"><%= result[i].id%></td>
+                            <td class="datatable-text-wrap" style="text-transform:none"><%= result[i].name %></td>
+                            <td class="datatable-text-wrap" style="text-transform:none">
+                              <%= result[i].type.substring(0,70) %>
+                              <% if(result[i].type.length>70) { %>
+                                ...
+                              <% } %>
+                            </td>
+                            <td>
+                             <a title="Edit" class="btn btn-secondary btn-sm" href="<%- baseUrl %>admin/<%- tableTitle %>/edit/<%- result[i].id %>"><i class="fa fa-edit"></i></a>
+                              <a title="delete"  class="btn btn-danger btn-sm" class="deleteButton" href="<%- baseUrl %>admin/<%- tableTitle %>/status/inactive/<%- result[i].id %>"><i class="fa fa-ban"></i></a>
+
+                            </td>
+                        </tr>	
+                    <% }  %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+
+ 
+
+    
+
+
+  
+<!-- include header -->
+<% include ../common/footer %>
+<!-- / end include -->	    
+<script src="/js/jquery.table2excel.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>
+
+<script>
+    jQuery.validator.setDefaults({
+		errorPlacement: function(error, element) {
+			if (element.attr("name") == "message") {
+				error.appendTo('.errorPlacement');
+			}else{
+				error.insertAfter(element);
+			}	
+		}
+	});
+  
+    $(document).ready(function() {
+        oTable = $('#datatable').DataTable({
+                "order": [[2, 'desc']],
+                // "bProcessing": true,
+                "columnDefs": [{"orderable": false, "targets": [3]}],
+                "dom": '<"top"i>rt<"bottom"flp><"clear">',
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        });
+
+        $('#sortByStatus').change(function(){
+                var term = $(this).val();
+                if(term == ""){
+                    window.location  = "<%- baseUrl %>admin/<%- tableTitle %>/all";
+                }else{
+                    window.location  = "<%- baseUrl %>admin/<%- tableTitle %>/"+term;
+                }
+        });
+        var pathname = window.location.pathname.split("/");
+        var status = pathname[pathname.length-1];
+        if(status == "all" || typeof status == "undefined"){
+            status = "";
+        }
+        $("#sortByStatus").val(status);
+        
+        $('#searchCustomInput').keyup(function(){
+            oTable.search($(this).val()).draw() ;
+        });
+  });
+
+
+  $(function() {
+          $("form[name='sendEmailsForm']").validate({
+                ignore: [],
+                debug: false,
+                rules: {
+                        subject:    {
+                            required: true,
+                            normalizer: function( value ) {
+                                return $.trim( value );
+                            },
+                            maxlength:100,
+                        },
+                        message:    {
+                            required: true,
+                            normalizer: function( value ) {
+                                return $.trim( value );
+                            },
+                            minlength:10,
+                        }					 
+                    
+                },
+            
+            messages: {
+                        message: "Please enter message content.",
+                },
+            submitHandler: function(form) {
+                $(":submit").html("Sending Email...").attr("disabled", true);
+                form.submit();
+            }
+      });
+  });
+
+  $(function() {
+          $("form[name='importCsvForm']").validate({
+                ignore: [],
+                debug: false,
+                rules: {
+                        file:    {
+                            required: true,
+                            extension: "csv",
+					                  filesize: 5242880  // in megabytes
+                        }				 
+                    
+                },
+                messages: {
+                     file: {
+                         extension: "File must be CSV."
+                     } 
+                },
+            submitHandler: function(form) {
+                $("#importCsvSubmitBtn").html("Importing...").attr("disabled", true);
+                form.submit();
+            }
+      });
+  });
+</script>  
+

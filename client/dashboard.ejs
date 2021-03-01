@@ -1,0 +1,135 @@
+<% include common/header.ejs%> 
+<!-- / end include	 -->
+<script type = 'text/javascript' >
+  var loginpageurl1 = "<%- baseUrl %>";
+  var loginpageurl2 = "<%- baseUrl %>admin";
+  
+  if(document.referrer == loginpageurl1 || document.referrer == loginpageurl2){
+    
+        (function (global) {
+  
+        if(typeof (global) === "undefined")
+        {
+          throw new Error("window is undefined");
+        }
+  
+        var _hash = "!";
+        var noBackPlease = function () {
+          global.location.href += "#";
+  
+          // making sure we have the fruit available for juice....
+          // 50 milliseconds for just once do not cost much (^__^)
+          global.setTimeout(function () {
+            global.location.href += "!";
+          }, 50);
+        };
+        
+        // Earlier we had setInerval here....
+        global.onhashchange = function () {
+          if (global.location.hash !== _hash) {
+            global.location.hash = _hash;
+          }
+        };
+  
+        global.onload = function () {
+          
+          noBackPlease();
+  
+          // disables backspace on page except on input fields and textarea..
+          document.body.onkeydown = function (e) {
+            var elm = e.target.nodeName.toLowerCase();
+            if (e.which === 8 && (elm !== 'input' && elm  !== 'textarea')) {
+              e.preventDefault();
+            }
+            // stopping event bubbling up the DOM tree..
+            e.stopPropagation();
+          };
+          
+        };
+  
+      })(window);
+  }
+</script>
+<script>$('.dashboard-li').addClass('active');</script>
+<main class="app-content">
+    <div class="app-title">
+      <div>
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+     <center>
+      <h4>
+        Hi, Click on Product menu, for check product details.
+      </h4>
+      <h4>
+        Hi, Click on Category menu, for check Category details.
+      </h4>
+     </center>
+      </div>
+    
+  </main>
+    
+<!-- include header -->
+<% include common/footer.ejs %>
+<!-- / end include -->	    
+<style>
+.dashboard-link:hover{text-decoration: none !important;}
+.widget-small:hover{    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;}
+</style>  
+
+<script type="text/javascript" src="/js/plugins/chart.js"></script>
+<script type="text/javascript">
+  var data = {
+      labels: ["January", "February", "March", "April", "May"],
+      datasets: [
+          {
+              label: "My First dataset",
+              fillColor: "rgba(220,220,220,0.2)",
+              strokeColor: "rgba(220,220,220,1)",
+              pointColor: "rgba(220,220,220,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56]
+          },
+          {
+              label: "My Second dataset",
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: [28, 48, 40, 19, 86]
+          }
+      ]
+  };
+  var pdata = [
+      {
+          value: 300,
+          color: "#46BFBD",
+          highlight: "#5AD3D1",
+          label: "Complete"
+      },
+      {
+          value: 50,
+          color:"#F7464A",
+          highlight: "#FF5A5E",
+          label: "In-Progress"
+      }
+  ]
+  
+  var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+  var lineChart = new Chart(ctxl).Line(data);
+  
+  var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+  var pieChart = new Chart(ctxp).Pie(pdata);
+</script> -->

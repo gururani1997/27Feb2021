@@ -1,0 +1,46 @@
+{
+  "name": "product",
+  "plural": "products",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "default": "ProductName"
+    },
+    "details": {
+      "type": "string"
+    },
+    "categoryId": {
+      "type": "string"
+    },
+     "categoryName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "active"
+    },
+    "mixins": {
+      "Paginator": {
+        "limit": 10,        
+        "maxLimit": 10,    
+        "noMaxLimit": true 
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "categories": {
+      "type": "hasMany",
+      "model": "category",
+      "foreignKey": "categoryId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

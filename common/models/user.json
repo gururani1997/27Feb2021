@@ -1,0 +1,57 @@
+{
+  "name": "user",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "required": true,
+      "description": "badge number"
+    },
+    "role": {
+      "type": "string",
+      "required": true,
+      "default": "member"
+    },
+    "phonenumber": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "tempPass": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "groups": {
+      "type": "hasMany",
+      "model": "group",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "userGroup"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,19 @@
+
+
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+      <div class="app-sidebar__user">
+        <div>
+          <% if (user_session) { %>
+             <p class="app-sidebar__user-designation">Welcome,</p>
+                          <p class="app-sidebar__user-name" style="text-transform: capitalize;"><%- user_session.fullName; %> </p>
+          <% } %>
+        </div>
+      </div>1
+      <ul class="app-menu">
+        <li><a class="app-menu__item dashboard-li" href="<%- baseUrl %>admin/dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+          <li><a class="app-menu__item coupons-li" href="<%- baseUrl %>admin/product/listing"><i class="app-menu__icon fa fa-bullhorn"></i><span class="app-menu__label">Products</span></a></li>
+          <li><a class="app-menu__item coupons-li" href="<%- baseUrl %>admin/Category/listing"><i class="app-menu__icon fa fa-envelope"></i><span class="app-menu__label">Category</span></a></li>
+      </ul>
+    </aside>

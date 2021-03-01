@@ -1,0 +1,50 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDB": {
+    "host": "myserver",
+    "port": 27017,
+    "url": "mongodb://localhost/node-test26",
+    "database": "node-test26",
+    "password": "",
+    "name": "mongoDB",
+    "user": "",
+    "connector": "mongodb"
+  },
+  "email": {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": false,
+        "port": 587,
+        "auth": {
+          "user": "neofitness.gourav@gmail.com",
+          "clientEmail": "socialadminots@yopmail.com",
+          "pass": "gourav1111"
+        }
+      }
+    ]
+  },
+  "email22": {
+    "name": "email22",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.office365.com",
+        "secure": false,
+        "port": 587,
+        "auth": {
+          "user": "info@otssolutions.com",
+          "clientEmail": "socialadminots@yopmail.com",
+          "pass": "@Ts#795P5"
+        }
+      }
+    ]
+  }
+}

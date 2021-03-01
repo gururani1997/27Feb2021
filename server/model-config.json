@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../node_modules/loopback-softdelete-mixin4",
+      "../node_modules/loopback-paginator",
+      "../common/mixins"
+    ]
+  },
+  "AccessToken": {
+    "dataSource": "mongoDB",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoDB",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDB",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mongoDB",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mongoDB",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "email"
+  },
+  "product": {
+    "dataSource": "mongoDB",
+    "public": true
+  },
+  "category": {
+    "dataSource": "mongoDB",
+    "public": true
+  }
+}

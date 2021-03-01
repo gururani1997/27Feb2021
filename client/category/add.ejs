@@ -1,0 +1,99 @@
+<!-- include header -->
+<% include ../common/header %>
+<!-- / end include -->	
+<script>$('.<%- tableTitle %>-li').addClass('active');</script>
+<style>
+  select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+  }
+
+  /* For IE10 */
+  select::-ms-expand {
+    display: none;
+  }
+</style>
+<main class="app-content">
+    <div class="app-title">
+        <div>
+          <h1>Add catyegory</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <form name="imageForm" id="imageForm" action="<%- baseUrl %>admin/<%- tableTitle %>/add" method="POST">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Name <span class="text-danger">*</span></label>
+                        <input name="name" class="form-control" placeholder="category name">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label class="control-label">Type <span class="text-danger">*</span></label>
+                      <textarea name="type" class="form-control" rows="5" placeholder="Type" style="resize: none;"></textarea>
+                    </div>    
+                    
+                </div>    
+                <div class="tile-footer">
+                      <a class="btn btn-secondary" href="<%- baseUrl%>admin/<%- tableTitle %>/listing"><i class="fa fa-fw fa-lg fa-times-circle" style="margin-top:-4px"></i>Cancel</a> &nbsp;&nbsp;&nbsp;<button class="btn btn-primary <%- tableTitle %>-form-submit" type="submit"><i class="fa fa-fw fa-lg fa-check-circle" style="margin-top:-4px"></i>Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+  
+  
+  
+  <script src="/js/validation/additional-methods-file-uploads.js"></script>
+  <script>
+
+
+
+      jQuery.validator.setDefaults({
+        errorPlacement: function(error, element) {
+          if (element.attr("name") == "menuDescription") {
+            error.appendTo('.errorPlacement');
+          }else{
+            error.insertAfter(element);
+          }	
+        }
+      });
+      
+      $(function() {
+          $("form[name='imageForm']").validate({  
+            ignore: [],
+			      // debug: true,
+            rules: {		 
+                    title:{
+                        required: true,
+                        maxlength:25
+                      },
+                    message:{
+                        required:true,
+                        maxlength:200
+                    },		
+            },
+            messages: {
+                    title : {
+                        required:"Title is required field."
+                      },
+                      message:{
+                        required: "Message is required field."
+                     }
+            },
+            submitHandler: function(form) {
+                $(":submit").attr("disabled", true);
+                form.submit(); 
+          }
+      });
+  });
+</script>  
+<!-- include header -->
+<% include ../common/footer %>
+<!-- / end include -->	    
+ 

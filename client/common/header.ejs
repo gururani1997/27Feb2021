@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <meta name="description" content="Pantex.">
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <title>Node_Test</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- <script src="/js/jquery-3.2.1.min.js"></script> -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/bootstrap-notify.min.js"></script>
+    <script src="/js/validation/jquery.validate.min.js"></script>
+    <script src="/js/validation/custom.validate.js"></script>
+  </head>
+
+  <body class="app sidebar-mini rtl ">
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo" href="<%- baseUrl %>admin/dashboard">
+
+      </a>
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      <!-- Navbar Right Menu-->
+    
+    </header>
+     <% if (error.length > 0) { %>
+        <script>
+            $.notify({
+              title: "Oops : ",
+              message: "<%- error %>",
+              icon: 'fa fa-check' 
+            },{
+              type: "danger"
+            });
+        </script>
+			  <!-- <div class="alert alert-danger text-center common-notification-alert"><%- error %></div> -->
+	  <% } %>
+
+    <% if (success.length > 0) { %>
+        <script>
+            $.notify({
+              title: "Congratulation : ",
+              message: "<%- success %>",
+              icon: 'fa fa-check' 
+            },{
+              type: "success"
+            });
+        </script>
+    <% } %>
+
+
+
+    <!-- include sidebar -->
+        <% include sidebar.ejs %>
+    <!-- / end sidebar -->	

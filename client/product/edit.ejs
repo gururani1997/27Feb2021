@@ -1,0 +1,140 @@
+<!-- include header -->
+<% include ../common/header %>
+<!-- / end include -->	
+<script>$('.<%- tableTitle %>-li').addClass('active');</script>
+
+<main class="app-content">
+    <div class="app-title">
+        <div>
+          <h1>Edit <%- tableTitleSingular %></h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <form name="userForm" action="<%- baseUrl %>admin/<%- tableTitle %>/updateUser" method="POST" enctype="multipart/form-data"> 
+                  <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label class="control-label"> Name <span class="text-danger">*</span></label>
+                        <input name="name" class="form-control" type="text" value="<%- result.name %>" placeholder="Full Name">
+                    
+                            <label class="control-label">category <span class="text-danger">*</span></label>
+                            <input  class="form-control" type="text" value="<%-result.categoryName%>" readonly>
+                        
+                          <label class="control-label">Details </label>
+                          <input name="details" class="form-control" type="text" value="<%- result.details %>" placeholder="Details" >
+                    <br>
+                  <input type="hidden" name="id" value="<%- result.id %>">
+                  <!-- <a class="btn btn-secondary" href="<%- baseUrl%>admin/<%- tableTitle %>/all"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>&nbsp;&nbsp;&nbsp; -->
+                  <button class="btn btn-primary <%- tableTitle %>-form-submit" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Submit</button>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <script src="/js/validation/additional-methods-file-uploads.js"></script>
+  <script>
+    $(function() {
+        $("form[name='userForm']").validate({ 
+             rules: {
+                      role: {
+                          required: true
+                      },
+                      fname:{
+                                required: true,
+                                maxlength:25,
+                                alphanumeric: true,
+                                noSpace:true,
+                                //normalizer: function( value ) {
+                                   //return $.trim( value );
+                                // },
+                                // remote: {
+                                //     url: "<%- baseUrl %>admin/users/checkSameNameExistExceptThis",
+                                //     type: "post",
+                                //     data: {
+                                //       _id: function () {
+                                //         return $('input[name="id"]').val();
+                                //       },
+                                //       name: function () {
+                                //         return $('input[name="username"]').val();
+                                //       }
+                                //     },
+                                //     beforeSend: function () {
+                                //     },
+                                //     complete: function (data) {
+                                        
+                                //     }
+                                // }
+                    },
+                    lname:{
+                        required: true,
+                        maxlength:25,
+                        alphanumeric: true,
+                        noSpace:true
+                    },
+                    /**
+                    email:{
+                                required: true,
+                                email: true,
+                                maxlength:50,
+                                remote: {
+                                    url: "<%- baseUrl %>admin/users/checkSameEmailExistExceptThis",
+                                    type: "post",
+                                    data: {
+                                      _id: function () {
+                                        return $('input[name="id"]').val();
+                                      },
+                                      name: function () {
+                                        return $('input[name="email"]').val();
+                                      }
+                                    },
+                                    beforeSend: function () {
+                                    },
+                                    complete: function (data) {
+                                        
+                                    }
+                                }
+                    },**/
+                    image:{
+                      extension: "png|jpeg|jpg",
+                      filesize: 5242880  // in megabytes
+                    },	
+                    phone:{
+                            number: true,
+                            minlength:10,
+                            maxlength:10,
+                    }						 
+                  
+          },
+          
+          messages: {
+                      username : {
+                             remote: "This name already exist in our system, Please use another.",
+                             noSpace: "Please do not use space."
+                      },
+                      lname:{
+                          noSpace: "Please do not use space."
+                      },
+                      email : {
+                             remote: "This email already exist in our system, Please use another."
+                      },
+                      image: "File must be JPEG, JPG or PNG, less than 5MB",
+                    },
+          submitHandler: function(form) {
+            $(":submit").attr("disabled", true);
+            form.submit();
+        }
+    });
+});
+</script>  
+
+
+<!-- include header -->
+<% include ../common/footer %>
+<!-- / end include -->	   
