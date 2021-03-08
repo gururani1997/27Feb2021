@@ -12,6 +12,16 @@ var momentTimeZ = require('moment-timezone');
 module.exports = function (app) {
     var product = app.models.product;
     var category = app.models.category;
+   
+
+    app.get('/', function (req, res) {
+        var data = {};
+        data.error = req.flash('error');
+        data.success = req.flash('success');
+        console.log("main dashboard")
+          res.render('dashboard', data);
+
+      });
 
     app.get('/admin/product/listing', (req, res) => {
 
